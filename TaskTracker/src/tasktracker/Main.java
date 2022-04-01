@@ -45,6 +45,8 @@ public class Main {
                 System.out.println(operator.getEpics());
                 operator.removeEpicbyID(operator.getEpicid());
                 break;
+            case 11:
+                System.out.println(operator.getSubtasks());
             default:
                 System.out.println("Такого пункта нет ди нах)");
 
@@ -56,7 +58,7 @@ public class Main {
         System.out.println("1. Добавить задачу\n2. Добавить эпик\n3. Добавить подзадачу");
         System.out.println("4. Посмотреть список подзадач эпика по ID\n5. Посмотреть список всех задач\n6. Посмотреть список всех эпиков");
         System.out.println("7. Изменить задачу\n8. Изменить подзадачу\n9. Удалить задачу\n10. Удалить Эпик");
-        System.out.println("0. Выйти");
+        System.out.println("11. showsubtasks");
     }
     public static int askID()
     {

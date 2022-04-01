@@ -133,6 +133,7 @@ public class Manager{
 
     public void updateSubtask(int identifier){
         Subtask currentSubtask = subtasks.get(identifier);
+        Epic currentEpic = Epics.get(subtasks.get(identifier).epicID);
         System.out.println("Шо хотите сделать? \n1. Имя сменить\n2.Описание сменить\n3. Стутус сменить");
         if (currentSubtask == null) {
             System.out.println("subtask null");
@@ -163,12 +164,15 @@ public class Manager{
             }
             Subtask newSub = new Subtask(newname, newdesciption, newstatus, currentSubtask.epicID);
             removeSubtaskByID(identifier);
+            currentEpic.addSubtask(newSub);
+            subtasks.put(newSub.getId(), newSub);
         }
 
     }
     public void removeSubtaskByID (int identifier){
-//        Epic epic = Epics.get(subtasks.get(identifier).epicID);
-//        epic.subtasksInEpic.remove(identifier);
+        Epic epic = Epics.get(subtasks.get(identifier).epicID);
+        int epicindex = epic.subtasksInEpic.indexOf(subtasks.get(identifier));
+        epic.subtasksInEpic.remove(epicindex);
         subtasks.remove(identifier);
     }
 }
