@@ -166,6 +166,21 @@ public class Manager{
             removeSubtaskByID(identifier);
             currentEpic.addSubtask(newSub);
             subtasks.put(newSub.getId(), newSub);
+
+            int subsInEpicCount = currentEpic.subtasksInEpic.size();
+            int dones = 0;
+            for (int i = 0; i < subsInEpicCount; i++)
+            {
+                if (currentEpic.subtasksInEpic.get(i).status.equals("DONE")){
+                    dones++;
+                }
+            }
+            if (dones == subsInEpicCount){
+                currentEpic.status = "DONE";
+            }
+            else{
+                currentEpic.status = "IN_PROGRESS";
+            }
         }
 
     }
