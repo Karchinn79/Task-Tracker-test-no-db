@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Manager{
+public class InMemoryTaskManager implements TaskManager{
     HashMap<Integer, Task> Tasks = new HashMap<>();
     HashMap<Integer, Epic> Epics = new HashMap<>();
     HashMap<Integer, Subtask> subtasks = new HashMap<>();
+    ArrayList<String> history = new ArrayList<>();
 
-    public Manager (){
+    public InMemoryTaskManager(){
 
     }
     public void addTask (Task task)
@@ -26,19 +27,20 @@ public class Manager{
     }
 
     public Task getTaskById(int identifier){
+        historyAddT(identifier);
         return Tasks.get(identifier);
     }
     public void removeTaskById(int identifier){
         Tasks.remove(identifier);
     }
-    public int getTaskid(){
+    public int getTaskId(){
         System.out.println("Введите ID");
         Scanner in = new Scanner(System.in);
         return in.nextInt();
     }
     public void updateTaskByID (){
         System.out.println("Вот список задач: " + Tasks);
-        int taskID = getTaskid();
+        int taskID = getTaskId();
         Task task = Tasks.get(taskID);
         Scanner in = new Scanner(System.in);
         System.out.println("Что изменить? \n 1. Название \n 2. Описание \n 3. Статус");
@@ -78,11 +80,38 @@ public class Manager{
         Tasks.put(task.getId(), task);
     }
 
+    @Override
+    public void history() {
+        for(int i = 0; i < history.size(); i++){
+            System.out.println(history.get(i));
+        }
+    }
+
+    @Override
+    public void historyAddT(int id) {
+        if(history.size()<10) {
+            history.add(getTaskById(id).toString());
+        }
+        else {
+            history.remove(0);
+            history.add(getTaskById(id).toString());
+        }
+    }
+    public void historyAddE(int id) {
+        if(history.size()<10) {
+            history.add(getTaskById(id).toString());
+        }
+        else {
+            history.remove(0);
+            history.add(getTaskById(id).toString());
+        }
+    }
+
     //Epics Part
     public void addEpic (Epic epic){
         Scanner in = new Scanner(System.in);
         System.out.println("Название, описание и статус введи да");
-        String n = in.nextLine(), a = in.nextLine(), s=in.nextLine();
+        String n = in.nextLine(), a = in.nextLine();
         epic = new Epic(n, a);
         Epics.put(epic.getId(), epic);
     }

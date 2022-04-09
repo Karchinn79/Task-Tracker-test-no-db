@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Manager operator = new Manager();
+        InMemoryTaskManager operator = new InMemoryTaskManager();
         Task taskOp = new Task();
         Epic epicOp = new Epic();
         Subtask subtaskOp = new Subtask();
@@ -39,7 +39,7 @@ public class Main {
                 operator.updateSubtask(askID());
                 break;
             case 9:
-               operator.removeTaskById(operator.getTaskid());
+               operator.removeTaskById(operator.getTaskId());
                 break;
             case 10:
                 System.out.println(operator.getEpics());
@@ -47,8 +47,13 @@ public class Main {
                 break;
             case 11:
                 System.out.println(operator.getSubtasks());
+                break;
+            case 12:
+                operator.history();
+                break;
             default:
                 System.out.println("Такого пункта нет ди нах)");
+                break;
 
         }
         }
@@ -58,7 +63,7 @@ public class Main {
         System.out.println("1. Добавить задачу\n2. Добавить эпик\n3. Добавить подзадачу");
         System.out.println("4. Посмотреть список подзадач эпика по ID\n5. Посмотреть список всех задач\n6. Посмотреть список всех эпиков");
         System.out.println("7. Изменить задачу\n8. Изменить подзадачу\n9. Удалить задачу\n10. Удалить Эпик");
-        System.out.println("11. showsubtasks");
+        System.out.println("11. showsubtasks\n12. Призвать историю\n 13. ");
     }
     public static int askID()
     {
